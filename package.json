@@ -1,0 +1,23 @@
+{
+  "name": "chama-yetu",
+  "version": "1.0.0",
+  "description": "Chama Management System - Semester Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "sqlite3": "^5.1.6",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "bcryptjs": "^2.4.3",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

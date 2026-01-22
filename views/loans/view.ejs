@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Chama Yetu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <%- include('../partials/header') %>
+
+  <div class="container mt-4">
+    <h1 class="mb-4">Loan Details</h1>
+
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">
+        <h5>Loan Information</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Member:</strong> <%= loan.member_name %></p>
+        <p><strong>Applied Date:</strong> <%= loan.applied_date %></p>
+        <p><strong>Principal Amount:</strong> KES <%= loan.amount.toFixed(2) %></p>
+        <p><strong>Interest Rate:</strong> <%= loan.interest_rate %>% (flat)</p>
+        <p><strong>Total Due:</strong> <span class="text-primary fw-bold">KES <%= balance.totalDue.toFixed(2) %></span></p>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-success text-white">
+        <h5>Repayment Status</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Amount Repaid:</strong> KES <%= balance.repaid.toFixed(2) %></p>
+        <p><strong>Outstanding Balance:</strong> 
+          <span class="text-danger fw-bold">KES <%= balance.balance.toFixed(2) %></span>
+        </p>
+        <div class="progress" style="height: 30px;">
+          <div class="progress-bar bg-success" 
+               role="progressbar" 
+               style="width: <%= (balance.repaid / balance.totalDue * 100).toFixed(0) %>%">
+            <%= (balance.repaid / balance.totalDue * 100).toFixed(0) %>% Repaid
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/" class="btn btn-primary">Back to Dashboard</a>
+  </div>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
