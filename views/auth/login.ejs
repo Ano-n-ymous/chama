@@ -5,41 +5,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Chama Yetu</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      animation: slideUp 0.8s ease;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .form-control {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 15px 20px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      background: rgba(255, 255, 255, 1);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .btn-login {
+      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 15px;
+      border-radius: 12px;
+      width: 100%;
+      font-size: 18px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+    
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+      color: white;
+    }
+    
+    .logo-icon {
+      font-size: 60px;
+      color: white;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .input-group-text {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-right: none;
+      border-radius: 12px 0 0 12px;
+      color: #6366f1;
+      width: 45px;
+      justify-content: center;
+    }
+    
+    .input-group .form-control {
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+    }
+    
+    .register-link {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .register-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .divider::before {
+      margin-right: 10px;
+    }
+    
+    .divider::after {
+      margin-left: 10px;
+    }
+    
+    .demo-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      margin-top: 15px;
+    }
+  </style>
 </head>
-<body class="bg-light">
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-header bg-primary text-white">
-            <h3 class="mb-0">Chama Yetu - Login</h3>
-          </div>
-          <div class="card-body p-4">
-            <% if (error) { %>
-              <div class="alert alert-danger"><%= error %></div>
-            <% } %>
-            
-            <form method="POST" action="/auth/login">
-              <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required>
-              </div>
-              
-              <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" required>
-              </div>
-              
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </form>
-
-            <hr>
-            <p class="text-center text-muted">
-              Demo: admin@chama.com / admin123
-            </p>
-          </div>
+<body>
+  <div class="glass-card">
+    <div class="text-center">
+      <i class="fas fa-users logo-icon"></i>
+      <h2 class="text-white mb-2 fw-bold">Chama Yetu</h2>
+      <p class="text-white-50 mb-4">Management System</p>
+    </div>
+    
+    <% if (error) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background: rgba(239, 68, 68, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 12px;">
+        <i class="fas fa-exclamation-circle me-2"></i><%= error %>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+    
+    <form method="POST" action="/auth/login">
+      <div class="mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" name="email" class="form-control" placeholder="Email address" required>
         </div>
       </div>
+      
+      <div class="mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-login mb-3">
+        <i class="fas fa-sign-in-alt me-2"></i>Login
+      </button>
+    </form>
+    
+    <!-- NEW: Register Link Section -->
+    <div class="divider">or</div>
+    
+    <div class="text-center">
+      <a href="/auth/register" class="register-link">
+        <i class="fas fa-user-plus"></i>
+        Create New Account
+      </a>
+    </div>
+    
+    <div class="text-center demo-text">
+      <small>
+        <i class="fas fa-info-circle me-1"></i>
+        Demo: admin@chama.com / admin123
+      </small>
     </div>
   </div>
 
